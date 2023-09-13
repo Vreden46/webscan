@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Bootstrap-Website</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Eigene CSS-Stile -->
+    <style>
+        body {
+            background-color: white; /* weißer Hintergrund */
+        }
+
+        .navbar {
+            background-color: #007bff; /* Blaue Navigationsleiste */
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: white; /* Weiße Schriftfarbe für Navigationslinks */
+        }
+
+        .container {
+            background-color: #f8f8f8; /* grauer Hintergrund für den Hauptinhalt */
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Hauptinhalt -->
+    <div class="container">
+
+
+        <h1>Ergebnisse des Scans</h1>
+        <p>&nbsp; </p>
+        <ul>
+            {% for item in my_list %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>{{ startwert }}</p>
+        <p><a href="input">neuer Scan</a></p>
+
+    </div>
+
+    <!-- Bootstrap JavaScript (optional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
