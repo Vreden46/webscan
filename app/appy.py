@@ -1,8 +1,9 @@
 from flask import Flask
 from datetime import datetime
 from flask import render_template, request, url_for, redirect, session
-from app.my_forms import HostPortForm
+from app.my_forms import HostPortForm, TracerouteForm
 import scan
+import trace
 from scapy.all import ICMP, IP, sr1, TCP
 
 # Eine globale Variable zum Speichern der Formulardaten
@@ -11,6 +12,7 @@ from scapy.all import ICMP, IP, sr1, TCP
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 my_list = []
+my_hops = []
 test = None
 startwert = "Ergebniss"
 
@@ -42,16 +44,27 @@ def input():
 
         print(my_list)
 
-
-
-
-
-
-
-
         # Weiterleitung an die Ergebnisse-Seite
         return redirect(url_for('ergebnis'))
     return render_template('input.html', form=form)
+
+@app.route('/traceroute', methods=['GET', 'POST'])
+def traceroute():
+    thost = None
+
+    form = TracerouteForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        thost = form.thost.data
+
+        my_hops.clear()
+        #my_hops.append("keine Hops")
+
+        trace.traceroute(thost, my_hops)
+
+
+    return render_template('traceroute.html', form=form, thost=thost, my_hops=my_hops)
+
 
 @app.route('/ergebnis')
 def ergebnis():

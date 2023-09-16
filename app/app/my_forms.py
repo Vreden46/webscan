@@ -7,3 +7,7 @@ class HostPortForm(FlaskForm):
     host = StringField('Host', validators=[DataRequired(), IPAddress()])
     portrange = StringField('Portrange', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class TracerouteForm(FlaskForm):
+    thost = StringField('thost', validators=[DataRequired()])
+    submit = SubmitField('Submit')

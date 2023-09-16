@@ -33,14 +33,30 @@
 </head>
 <body>
 
-
+    <div class="container mt-5">
+        {% if thost %}
+        <ul>
+            {% for item in my_hops %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
     <!-- Hauptinhalt -->
     <div class="container mt-5">
-        <h1>Willkommen auf dem Admin-Hilfsseite {{ current_datetime }}</h1>
+        <h1>Bitte Target-Host eingeben</h1>
         <p>&nbsp; </p>
-        <p>{{ startwert }}</p>
-	<p><a href="input">Klicken Sie hier, um zum Portscan zu gelangen</a></p>
-    <p><a href="traceroute">Klicken Sie hier, um zu Traceroute zu gelangen</a></p>
+        <form method="POST" action="/traceroute">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="name" class="text-primary">Bitte Zielhost eintragen</label>
+                {{ form.thost(size=20, class="form-control") }}
+                {{ form.thost.errors }}
+            </div>
+            <div class="form-group">
+                {{ form.submit() }}
+            </div>
+        </form>
     </div>
 
     <!-- Bootstrap JavaScript (optional) -->
